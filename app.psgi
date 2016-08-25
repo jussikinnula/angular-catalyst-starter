@@ -29,6 +29,7 @@ builder {
     enable 'ReverseProxy';
 
     mount '/assets' => Plack::App::File->new(root => "root/assets")->to_app;
+    mount '/favicon.ico' => Plack::App::File->new(file => "root/favicon.ico")->to_app;
     mount '/rest' => $app;
     mount '/' => $spa->('root','/');
 }
