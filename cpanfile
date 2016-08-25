@@ -1,0 +1,30 @@
+requires 'Catalyst::Runtime' => '5.90103';
+requires 'Catalyst::Action::RenderView';
+requires 'Catalyst::Controller::REST';
+requires 'Catalyst::Model::Adaptor';
+requires 'Catalyst::Model::DBIC::Schema';
+requires 'Catalyst::Plugin::ConfigLoader';
+requires 'Catalyst::Plugin::Static::Simple';
+requires 'Catalyst::View::Xslate';
+requires 'Env::Heroku::Pg';
+
+requires 'Moose';
+requires 'namespace::autoclean';
+requires 'Config::General';
+requires 'DBIx::Class::Migration';
+requires 'DBD::Pg';
+requires 'Plack::Builder';
+requires 'Plack::Response';
+requires 'Plack::Middleware::ReverseProxy';
+requires 'Plack::Middleware::DirIndex';
+requires 'Plack::Middleware::CrossOrigin';
+requires 'Plack::Middleware::Header';
+
+requires 'Data::Dumper';
+requires 'Date::Parse';
+requires 'DateTime';
+requires 'DateTime::Format::Pg';
+requires 'JSON';
+requires 'Scalar::Util';
+requires 'Text::Unidecode';
+requires 'Try::Tiny';

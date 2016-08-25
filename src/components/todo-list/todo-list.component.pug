@@ -1,0 +1,5 @@
+.todo(*ngFor="let todo of todos")
+    a(
+        [routerLink]="['/todo/' + todo.id]",
+        [class.active]="router.url === '/todo/' + todo.id"
+    ) {{todo.title}}

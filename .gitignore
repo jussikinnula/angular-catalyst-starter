@@ -1,0 +1,8 @@
+/typings
+/root
+*~
+node_modules
+.*
+!.gitignore
+/*.sql
+/*.dump
