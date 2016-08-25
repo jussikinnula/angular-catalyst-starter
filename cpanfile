@@ -6,7 +6,7 @@ requires 'Catalyst::Model::DBIC::Schema';
 requires 'Catalyst::Plugin::ConfigLoader';
 requires 'Catalyst::Plugin::Static::Simple';
 requires 'Catalyst::View::Xslate';
-requires 'Env::Heroku::Pg';
+requires 'Env::Heroku';
 
 requires 'Moose';
 requires 'namespace::autoclean';
