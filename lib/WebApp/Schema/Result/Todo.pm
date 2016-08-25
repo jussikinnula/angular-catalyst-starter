@@ -8,7 +8,7 @@ use JSON;
 use Data::Dumper;
 use base 'DBIx::Class::Core';
 
-__PACKAGE__->table("item");
+__PACKAGE__->table("todo");
 
 __PACKAGE__->load_components("InflateColumn::DateTime");
 
