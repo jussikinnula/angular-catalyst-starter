@@ -1,5 +1,5 @@
 {
-  "name": "angular2-mean-starter",
+  "name": "angular2-catalyst-starter",
   "dependencies": {
     "mongoose": "registry:npm/mongoose#4.3.5+20160628072220"
   },
