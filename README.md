@@ -121,6 +121,7 @@ If you edit the `src` -files (Angular 2 part of the app), you can recompile with
 heroku create --region eu
 heroku buildpacks:add https://github.com/pnu/heroku-buildpack-perl.git
 heroku buildpacks:add https://github.com/heroku/heroku-buildpack-nodejs
+heroku config:set PERL5LIB=/app/local/lib/perl5:/app/vendor/lib/perl5
 heroku addons:create heroku-postgresql:hobby-dev
 git push heroku master
 heroku run database/migrate.pl install
