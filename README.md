@@ -2,6 +2,15 @@
 
 A simple starting point to build a web application using Catalyst Framework and Angular 2 frontend.
 
+## Highlights
+
+- Angular 2 RC6 support (with `NgModule` -type of modules)
+- Testing with Karma & Jasmine for the Frontend components
+- REST API done on Catalyst side, with DBIx classes
+- Frontend HTML templates are made with Pug (former Jade) and styles with Stulus
+- Easy-to-use date pipe replacement (using MomentJS instead of the default Angular 2 date pipe)
+- Deployable to Heroku, without pre-compiling any frontend assets (only thing needs pre-compiling, is generated SQL migration scripts to install/upgrade/downgrade PostgreSQL -database)
+
 ## Prequisities
 
 ### Basic CLI tools and libs
