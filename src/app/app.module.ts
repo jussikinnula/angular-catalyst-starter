@@ -3,6 +3,7 @@ import { NgModule, ModuleWithProviders } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
+import { RouterModule } from "@angular/router";
 
 // App component
 import { AppComponent } from "./app.component";
@@ -12,6 +13,9 @@ import { FrontpageView, TodoView } from "../views";
 
 // Routing
 import { routing } from "./app.routing";
+
+// Shared components
+import { ComponentsModule } from "../components/components.module";
 
 // Shared pipes
 import { PipesModule } from "../pipes/pipes.module";
@@ -25,6 +29,8 @@ import { ServicesModule } from "../services/services.module";
         CommonModule,
         FormsModule,
         HttpModule,
+        RouterModule,
+        ComponentsModule,
         PipesModule,
         ServicesModule,
         routing

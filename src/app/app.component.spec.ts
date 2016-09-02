@@ -1,4 +1,6 @@
-import { addProviders } from "@angular/core/testing";
+import { TestBed } from "@angular/core/testing";
+import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from "@angular/platform-browser-dynamic/testing";
+
 import { AppComponent } from "./app.component";
 
 describe("Testing AppComponent", () => {
