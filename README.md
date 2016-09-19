@@ -4,7 +4,8 @@ A simple starting point to build a web application using Catalyst Framework and 
 
 ## Highlights
 
-- Angular 2 RC6 support (with `NgModule` -type of modules)
+- Angular 2.0.0 final support (with `NgModule` -type of modules)
+- Webpack 2 bundling, including lazy routes
 - Testing with Karma & Jasmine for the Frontend components
 - REST API done on Catalyst side, with DBIx classes
 - Frontend HTML templates are made with Pug (former Jade) and styles with Stulus
