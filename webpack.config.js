@@ -4,12 +4,13 @@ const webpack = require('webpack');
 
 // plugins
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
+const ContextReplacementPlugin = webpack.ContextReplacementPlugin;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const DefinePlugin = webpack.DefinePlugin;
 const DedupePlugin = webpack.optimize.DedupePlugin;
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const OccurenceOrderPlugin = webpack.optimize.OccurenceOrderPlugin;
+const OccurrenceOrderPlugin = webpack.optimize.OccurrenceOrderPlugin;
 const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
 module.exports = {
@@ -23,7 +24,10 @@ module.exports = {
             {
                 test: /\.ts$/,
                 exclude: [path.resolve(__dirname, './node_modules')],
-                loader: 'ts'
+                loaders: [
+                    'ts-loader',
+                    'angular2-router-loader?loader=system&genDir=assets'
+                ]
             },
             {
                 test: /\.pug$/,
@@ -31,12 +35,12 @@ module.exports = {
             },
             {
                 test: /\.styl$/,
-                exclude: [path.resolve(__dirname, './src/styles')],
-                include: [path.resolve(__dirname, './src')],
+                include: [path.resolve(__dirname, './src/app')],
                 loader: 'raw!postcss-loader!stylus-loader'
             },
             {
                 test: /\.styl$/,
+                exclude: [path.resolve(__dirname, '../src/app')],
                 include: [path.resolve(__dirname, './src/styles')],
                 loader: ExtractTextPlugin.extract('raw!postcss-loader!stylus-loader')
             }
@@ -66,9 +70,13 @@ module.exports = {
     ],
 
     plugins: [
+        new ContextReplacementPlugin(
+            /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+            __dirname
+        ),
         new ExtractTextPlugin('assets/css/[contenthash:16].css'),
-        new DedupePlugin(),
-        new OccurenceOrderPlugin(),
+        //new DedupePlugin(),
+        new OccurrenceOrderPlugin(),
         new CommonsChunkPlugin({
             name: [
                 'assets/js/main.js',
@@ -87,7 +95,7 @@ module.exports = {
             }
         ]),
         new HtmlWebpackPlugin({
-            chunksSortMode: 'none',
+            chunksSortMode: 'auto',
             filename: 'index.html',
             hash: true,
             inject: 'body',

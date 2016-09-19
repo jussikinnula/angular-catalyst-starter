@@ -11,5 +11,6 @@ const template: string = require("./app.component.pug");
 })
 
 export class AppComponent {
+
     constructor() {}
 }

@@ -1,0 +1,12 @@
+h1 Angular 2 MEAN starter
+nav
+    a(
+        [routerLink]="['/']",
+        [class.active]="router.url === '/'"
+    ) Frontpage
+    a(
+        [routerLink]="['/todo']",
+        [class.active]="router.url === '/todo' || router.url.startsWith('/todo/')"
+    ) Todos
+
+

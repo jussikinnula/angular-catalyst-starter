@@ -2,7 +2,7 @@ import { enableProdMode } from "@angular/core";
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 
 // App module
-import { AppModule } from "./app";
+import { AppModule } from "./app/app.module";
 
 // Global styles
 import "./styles/main.styl";

@@ -1,10 +1,10 @@
-import { Routes, RouterModule }  from "@angular/router";
+import { Routes } from "@angular/router";
 
-import { FrontpageRoutes, TodoRoutes } from "../views";
+declare var System: any;
 
 export const AppRoutes: Routes = [
-    ...FrontpageRoutes,
-    ...TodoRoutes
+    { path: "", pathMatch: "full", loadChildren: "./+frontpage/index#FrontpageModule" },
+    { path: "todo", loadChildren: "./+todo/index#TodoModule" },
+    { path: "404", loadChildren: "./+pagenotfound/index#PageNotFoundModule" },
+    { path: "**", pathMatch: "full", redirectTo: "/404" }
 ];
-
-export const routing = RouterModule.forRoot(AppRoutes);
