@@ -1,1 +1,1 @@
-export * from "./todo.model.ts";
+export * from "./todo.model";

@@ -7,20 +7,19 @@ const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 const ContextReplacementPlugin = webpack.ContextReplacementPlugin;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const DefinePlugin = webpack.DefinePlugin;
-const DedupePlugin = webpack.optimize.DedupePlugin;
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const LoaderOptionsPlugin = webpack.LoaderOptionsPlugin;
 const OccurrenceOrderPlugin = webpack.optimize.OccurrenceOrderPlugin;
 const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
 module.exports = {
     target: 'web',
     cache: true,
-    debug: false,
     devtool: 'source-map',
 
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.ts$/,
                 exclude: [path.resolve(__dirname, './node_modules')],
@@ -36,13 +35,13 @@ module.exports = {
             {
                 test: /\.styl$/,
                 include: [path.resolve(__dirname, './src/app')],
-                loader: 'raw!postcss-loader!stylus-loader'
+                loader: 'raw-loader!postcss-loader!stylus-loader'
             },
             {
                 test: /\.styl$/,
                 exclude: [path.resolve(__dirname, '../src/app')],
                 include: [path.resolve(__dirname, './src/styles')],
-                loader: ExtractTextPlugin.extract('raw!postcss-loader!stylus-loader')
+                loader: ExtractTextPlugin.extract('raw-loader!postcss-loader!stylus-loader')
             }
         ]
     },
@@ -65,17 +64,21 @@ module.exports = {
         'assets/js/polyfills.js': './src/polyfills'
     },
 
-    postcss: [
-        autoprefixer({ browsers: ['last 3 versions', 'Firefox ESR'] })
-    ],
-
     plugins: [
+        new LoaderOptionsPlugin({
+            debug: false,
+            options: {
+                postcss: [
+                    autoprefixer({ browsers: ['last 3 versions', 'Firefox ESR'] })
+                ],
+                resolve: {}
+            },
+        }),
         new ContextReplacementPlugin(
             /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
             __dirname
         ),
         new ExtractTextPlugin('assets/css/[contenthash:16].css'),
-        //new DedupePlugin(),
         new OccurrenceOrderPlugin(),
         new CommonsChunkPlugin({
             name: [
@@ -116,18 +119,19 @@ module.exports = {
     ],
 
     resolve: {
-        extensions: ['', '.ts', '.js', '.json'],
-        modulesDirectories: ['node_modules'],
-        root: path.resolve('./src')
+        extensions: ['.ts', '.js', '.json'],
+        modules: [path.resolve('../src'), 'node_modules']
     },
 
     output: {
         filename: '[name]',
-        path: path.resolve(__dirname, './root'),
+        chunkFilename: 'assets/js/[chunkhash].js',
+        path: path.resolve(__dirname, '../target'),
         publicPath: '/'
     },
 
     node: {
+        global: true,
         net: false,
         fs: false,
         crypto: 'empty',
