@@ -28,8 +28,26 @@ my $spa = sub { my ($root, $base) = @_; builder {
 builder {
     enable 'ReverseProxy';
 
-    mount '/assets' => Plack::App::File->new(root => "root/assets")->to_app;
-    mount '/favicon.ico' => Plack::App::File->new(file => "root/favicon.ico")->to_app;
+    mount '/assets' => builder {
+        enable_if { $ENV{PLACK_ENV} ne 'development' } sub {
+            Plack::App::File->new(root => 'root/assets')->to_app;
+        };
+        sub { [ '404', [ 'Content-Type' => 'text/html' ], ['not found'] ] };
+    };
+
+    mount '/favicon.ico' => builder {
+        enable_if { $ENV{PLACK_ENV} ne 'development' } sub {
+            Plack::App::File->new(file => 'root/assets/favicon/favicon.ico')->to_app;
+        };
+        sub { [ '404', [ 'Content-Type' => 'text/html' ], ['not found'] ] };
+    };
+
     mount '/rest' => $app;
-    mount '/' => $spa->('root','/');
+
+    mount '/' => builder {
+        enable_if { $ENV{PLACK_ENV} ne 'development' } sub {
+            $spa->('root','/');
+        };
+        sub { [ '200', [ 'Content-Type' => 'text/html' ], ['development mode'] ] };
+    };
 }
