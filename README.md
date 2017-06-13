@@ -1,15 +1,14 @@
-# angular2-catalyst-starter
+# angular-catalyst-starter
 
-A simple starting point to build a web application using Catalyst Framework and Angular 2 frontend.
+A simple starting point to build a web application using Catalyst Framework and Angular frontend.
 
 ## Highlights
 
-- Angular 2.0.0 final support (with `NgModule` -type of modules)
-- Webpack 2 bundling, including lazy routes
-- Testing with Karma & Jasmine for the Frontend components
+- Angular 4.1.x framework
+- Webpack 2.6 bundling, including lazy routes
 - REST API done on Catalyst side, with DBIx classes
 - Frontend HTML templates are made with Pug (former Jade) and styles with Stulus
-- Easy-to-use date pipe replacement (using MomentJS instead of the default Angular 2 date pipe)
+- Easy-to-use date pipe replacement (using MomentJS instead of the default Angular's default date pipe which requires `Intl` support from browser)
 - Deployable to Heroku, without pre-compiling any frontend assets (only thing needs pre-compiling, is generated SQL migration scripts to install/upgrade/downgrade PostgreSQL -database)
 
 ## Prequisities
@@ -91,21 +90,38 @@ nvm use v6.3.1
 ## Installation
 
 ```
-git clone git@github.com:jussikinnula/angular2-catalyst-starter
-cd angular2-catalyst-starter
+git clone git@github.com:jussikinnula/angular-catalyst-starter
+cd angular-catalyst-starter
 cpanm --installdeps .
 npm install
-createdb angular2-catalyst-starter
-PGDATABASE=angular2-catalyst-starter database/migrate.pl install
-```
-
-You are ready then to start the web server (locally we use `plackup`):
-
-```
-PGDATABASE=angular2-catalyst-starter plackup
+createdb angular-catalyst-starter
+PGDATABASE=angular-catalyst-starter database/migrate.pl install
 ```
 
 ## Development
+
+### Full stack development
+
+Full stack development mode runs Catalyst backend (`plackup`) and `webpack-dev-server` using `concurrently`.
+
+```
+PGDATABASE=angular-catalyst-starter npm run dev
+```
+
+### Run backend and frontend separately:
+
+```
+# Start Catalyst backend
+PGDATABASE=angular-catalyst-starter npm run dev:plackup
+```
+
+```
+# Start webpack-dev-server
+# (frontend + livereloading + proxies /rest to Catalyst side)
+npm run dev:webpack
+```
+
+## Database migration
 
 If you add features to the DBIx schema, you need to update the migration files (and remember to bump the version):
 
@@ -114,13 +130,13 @@ If you add features to the DBIx schema, you need to update the migration files (
 $EDITOR lib/WebApp/Schema.pm
 
 # generate the migration files
-PGDATABASE=angular2-catalyst-starter migrate.pl prepare
+PGDATABASE=angular-catalyst-starter migrate.pl prepare
 
 # check the currently installed version
-PGDATABASE=angular2-catalyst-starter migrate.pl status
+PGDATABASE=angular-catalyst-starter migrate.pl status
 
 # upgrade
-PGDATABASE=angular2-catalyst-starter migrate.pl upgrade
+PGDATABASE=angular-catalyst-starter migrate.pl upgrade
 ```
 
 If you edit the `src` -files (Angular 2 part of the app), you can recompile with simply running `webpack`.
