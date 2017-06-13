@@ -1,0 +1,30 @@
+@import '../../../shared/styles/variables'
+@import '../../../shared/styles/mixins'
+
+:host
+  display block
+
+h1
+  background-image url('./logo.png')
+  background-size 637px 163px
+  background-position top center
+  background-repeat no-repeat
+  padding-top 163px
+  text-align center
+
+nav
+  font-size 1.5em
+  padding 5px 0 4px 0
+  margin 0
+  a
+    color color-main-background !important
+    background-color color-main-border
+    text-decoration none
+    padding 5px 10px
+    margin: 0 !important
+    border 1px solid color-main-border
+    border-bottom 0
+    &.active
+      color color-main-border !important
+      margin: 0 !important
+      background-color color-main-background

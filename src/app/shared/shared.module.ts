@@ -1,18 +1,23 @@
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
-import { ComponentsModule } from "./components/components.module";
-import { PipesModule } from "./pipes/pipes.module";
-import { ServicesModule } from "./services/services.module";
+import { DatePipe, OrderByPipe } from './pipes';
 
 @NgModule({
-    imports: [
-        ComponentsModule,
-        PipesModule,
-        ServicesModule
-    ],
-    exports: [
-        ComponentsModule,
-        PipesModule
-    ]
+  imports: [
+    CommonModule,
+    FormsModule
+  ],
+  declarations: [
+    DatePipe,
+    OrderByPipe
+  ],
+  exports: [
+    CommonModule,
+    FormsModule,
+    DatePipe,
+    OrderByPipe
+  ]
 })
 export class SharedModule {}
