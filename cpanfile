@@ -1,4 +1,4 @@
-requires 'Catalyst::Runtime' => '5.90103';
+requires 'Catalyst::Runtime' => '5.90115';
 requires 'Catalyst::Action::RenderView';
 requires 'Catalyst::Controller::REST';
 requires 'Catalyst::Model::Adaptor';
