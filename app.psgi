@@ -29,7 +29,7 @@ builder {
     enable 'ReverseProxy';
 
     mount '/assets' => builder {
-        enable_if { $ENV{PLACK_ENV} ne 'development' } sub {
+        enable_if { !defined $_[0]->{PLACK_ENV} || $_[0]->{PLACK_ENV} ne 'development' } sub {
             Plack::App::File->new(root => 'root/assets')->to_app;
         };
         sub { [ '404', [ 'Content-Type' => 'text/html' ], ['not found'] ] };
@@ -45,9 +45,10 @@ builder {
     mount '/rest' => $app;
 
     mount '/' => builder {
-        enable_if { $ENV{PLACK_ENV} ne 'development' } sub {
+        print $ENV{PLACK_ENV};
+        enable_if { !defined $_[0]->{PLACK_ENV} || $_[0]->{PLACK_ENV} ne 'development' } sub {
             $spa->('root','/');
         };
-        sub { [ '200', [ 'Content-Type' => 'text/html' ], ['development mode'] ] };
+        sub { [ 200, [ 'Content-Type' => 'text/html' ], ['development mode'] ] };
     };
 }
