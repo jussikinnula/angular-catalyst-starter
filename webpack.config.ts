@@ -143,7 +143,7 @@ export default {
     }),
 
     new CommonsChunkPlugin({
-      name: ['vendor', 'polyfills'],
+      names: ['vendor', 'polyfills'],
       filename: 'assets/js/[name].[hash].js',
       minChunks: Infinity
     }),
