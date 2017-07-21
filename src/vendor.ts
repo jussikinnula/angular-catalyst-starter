@@ -5,5 +5,4 @@ import "@angular/platform-browser-dynamic";
 import "@angular/http";
 import "@angular/router";
 import "@angular/forms";
-import "rxjs";
 import "moment";
